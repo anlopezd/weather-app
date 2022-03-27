@@ -1,7 +1,10 @@
+import "./weatherInfo.css"
 
 export const WeatherInfo = ({ weatherInfo, loading }) => {
   
     const { name, weather, main} = weatherInfo
+
+    let img;
 
     if(weatherInfo.message){
         return (
@@ -16,6 +19,20 @@ export const WeatherInfo = ({ weatherInfo, loading }) => {
         )
     }
 
+    switch (weather[0].description) {
+        case "tormenta":
+        img = "tormenta.jpg"    
+        break;
+
+        case "llovizna" && "llovizna ligera":
+        img = "llovizna.jpg"
+        break;
+
+        default:
+        img = "cloud.jpg"
+
+    }
+
     return (
         <div className="text-center">
             {loading ? (
@@ -24,6 +41,7 @@ export const WeatherInfo = ({ weatherInfo, loading }) => {
           </div>
         ) : (
             <div className="card text-black">
+                <img src={`imagenes/${img}`} alt="time" className="card-img-top img" />
             <div className="card-body">
                 <div className="text-center">
                    <h2 className="card-title">{ name }</h2>
